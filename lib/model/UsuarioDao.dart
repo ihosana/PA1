@@ -17,4 +17,7 @@ abstract class UsuarioDao {
 
   @delete
   Future<void> deleteUsuario(UsuarioBD usuario);
+
+//  @Query('SELECT * UsuarioBD WHERE cpf=?')
+  //Future<List<UsuarioBD>> getAllByCpf();
 }

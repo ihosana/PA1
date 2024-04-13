@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pa1_activy/Listar.dart';
 import 'package:pa1_activy/cadastro.dart';
 import 'package:pa1_activy/dataBase/AppDatabase.dart';
+import 'package:pa1_activy/login.dart';
 import 'package:pa1_activy/model/Usuario.dart';
 import 'package:pa1_activy/model/UsuarioBD.dart';
 import 'package:pa1_activy/model/UsuarioDao.dart';
@@ -13,6 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Listar() ;
+    return LoginPage() ;
   }
 }
