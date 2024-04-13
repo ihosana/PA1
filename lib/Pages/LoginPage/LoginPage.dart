@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Listar.dart';
-import 'package:pa1_activy/dataBase/AppDatabase.dart';
+import 'package:pa1_activy/Pages/CadastroPage/CadastroPage.dart';
+import 'package:pa1_activy/Pages/RoutingPage.dart';
+import 'package:pa1_activy/dataBase/DataBase.dart';
 
 class LoginPage extends StatelessWidget {
-  final TextEditingController senha = TextEditingController();
+  final TextEditingController password = TextEditingController();
   final TextEditingController login = TextEditingController();
 
   @override
@@ -50,7 +52,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             SizedBox(height: 20),
                             TextFormField(
-                              controller: senha,
+                              controller: password,
                               decoration: InputDecoration(
                                 labelText: 'Senha',
                                 prefixIcon: Icon(Icons.lock),
@@ -65,6 +67,22 @@ class LoginPage extends StatelessWidget {
                         onPressed: () => procurarUser(context),
                         child: Text('Entrar'),
                       ),
+                       ElevatedButton(
+                        onPressed: () => 
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CadastroPage()),
+                          ),
+                        child: Text('Cadastrar'),
+                      ),
+                       ElevatedButton(
+                        onPressed: () => 
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Listar()),
+                          ),
+                        child: Text('lista'),
+                      ),
                     ],
                   ),
                 ),
@@ -77,20 +95,23 @@ class LoginPage extends StatelessWidget {
   }
 
   procurarUser(BuildContext context) async {
-    final appDatabase = await $FloorAppDatabase.databaseBuilder('AppDatabase.db').build();
+    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
     final dao = appDatabase.usuarioDao;
   
     // Obtenha o texto dos campos de texto
     final loginText = login.text;
-    final senhaText = senha.text;
+    final passwordText = password.text;
 
     // Busque o usuário pelo login e senha
     final usuarios = await dao.getAll();
-    for (var usuario in usuarios) {
+    for (var i in usuarios) {
         // Usuário encontrado, faça algo, como navegar para a próxima tela
-       if ((loginText==usuario.login) && (int.parse(senhaText)==usuario.senha)){
-           print('senha: ${usuario.senha}, Nome: ${usuario.login}');
-          
+       if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==false)){
+           print('senha: ${i.password}, Nome: ${i.login}');
+            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RoutingPage()),
+                          );
            return;
            
         }else{

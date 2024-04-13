@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pa1_activy/dataBase/AppDatabase.dart';
-import 'package:pa1_activy/model/Usuario.dart';
-import 'package:pa1_activy/model/UsuarioBD.dart';
-import 'package:pa1_activy/model/UsuarioDao.dart';
+import 'package:pa1_activy/dataBase/DataBase.dart';
+import 'package:pa1_activy/Model/User/User.dart';
+import 'package:pa1_activy/Model/User/UserDB.dart';
+import 'package:pa1_activy/Model/User/UserDao.dart';
 
 class Listar extends StatelessWidget {
   const Listar({super.key});
@@ -16,7 +16,7 @@ class Listar extends StatelessWidget {
           title: const Text('Lista de Usuarios'),
           
         ),
-        body: FutureBuilder<List<UsuarioBD>>(
+        body: FutureBuilder<List<UserDB>>(
           // Recupere a lista de produtos da DAO
           future: _loadUserData(),
           builder: (context, snapshot) {
@@ -31,10 +31,10 @@ class Listar extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                UsuarioBD user = snapshot.data![index];
+                UserDB user = snapshot.data![index];
                 return ListTile(
-                  title: Text(user.nome+"isADM:"+user.isAdm.toString()),
-                  subtitle: Text("Senha: "+user.senha.toString()+", CPF:"+user.cpf.toString()),
+                  title: Text(user.name+"isADM:"+user.isAdm.toString()),
+                  subtitle: Text("Senha: "+user.password.toString()+", CPF:"+user.cpf.toString()),
                   
                   // Adicione outros campos conforme necessário
                 );
@@ -52,9 +52,9 @@ class Listar extends StatelessWidget {
     );
   }
 
-  Future<List<UsuarioBD>> _loadUserData() async {
+  Future<List<UserDB>> _loadUserData() async {
     // Aqui você precisa usar a classe concreta gerada pelo Floor
-    final appDatabase = await $FloorAppDatabase.databaseBuilder('AppDatabase.db').build();
+    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
     final dao = appDatabase.usuarioDao;
     //var bd= UsuarioBD(4,"Taniro", 666, "tan", false, 123);
    // dao.insertUsuario(bd);

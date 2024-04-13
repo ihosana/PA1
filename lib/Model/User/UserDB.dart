@@ -1,19 +1,19 @@
 import 'package:floor/floor.dart';
 
 @Entity()
-class UsuarioBD {
-  @PrimaryKey(autoGenerate: true)
- 
+class UserDB {
 
-  final String nome;
+  final String name;
+  @PrimaryKey(autoGenerate: true)
   final int cpf;
+  
   final String login;
   final bool isAdm;
-  final int senha;
-  UsuarioBD(
-       this.nome,
+  final int password;
+  UserDB(
+       this.name,
        this.cpf,
        this.login,
        this.isAdm,
-       this.senha);
+       this.password);
 }
