@@ -1,8 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:pa1_activy/Model/Product/Product.dart';
-import 'package:pa1_activy/Model/User/User.dart';
-import 'package:pa1_activy/Model/User/UserDB.dart';
-import 'package:pa1_activy/Model/Sale/Sale.dart';
+import 'package:pa1_activy/Models/User/UserDB.dart';
 
 @dao
 abstract class UserDao {

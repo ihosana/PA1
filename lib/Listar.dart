@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/dataBase/DataBase.dart';
-import 'package:pa1_activy/Model/User/User.dart';
-import 'package:pa1_activy/Model/User/UserDB.dart';
-import 'package:pa1_activy/Model/User/UserDao.dart';
+import 'package:pa1_activy/Models/User/UserDB.dart';
 
 class Listar extends StatelessWidget {
   const Listar({super.key});

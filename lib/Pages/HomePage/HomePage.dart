@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pa1_activy/Model/Product/Product.dart';// Importando a classe Product
-import 'package:pa1_activy/Model/Product/ProductDB.dart';
-import 'package:pa1_activy/dataBase/DataBase.dart';
+import 'package:pa1_activy/Models/Product/Product.dart';
 import 'Components/categories.dart'; // Importando os widgets RectangularItem e SquareItem
 
 class HomePage extends StatelessWidget {
