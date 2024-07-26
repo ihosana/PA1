@@ -12,7 +12,7 @@ class Listar extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.blue,
           title: const Text('Lista de Usuarios'),
-          
+
         ),
         body: FutureBuilder<List<UserDB>>(
           // Recupere a lista de produtos da DAO
@@ -31,22 +31,22 @@ class Listar extends StatelessWidget {
               itemBuilder: (context, index) {
                 UserDB user = snapshot.data![index];
                 return ListTile(
-                  title: Text(user.name+"isADM:"+user.isAdm.toString()),
+                  title: Text(user.login+"isADM:"+user.isAdm.toString()),
                   subtitle: Text("Senha: "+user.password.toString()+", CPF:"+user.cpf.toString()),
-                  
+
                   // Adicione outros campos conforme necessário
                 );
               },
-              
-              
+
+
             );
           },
-          
-          
+
+
         ),
-        
+
       ),
-      
+
     );
   }
 
@@ -55,7 +55,7 @@ class Listar extends StatelessWidget {
     final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
     final dao = appDatabase.usuarioDao;
     //var bd= UsuarioBD(4,"Taniro", 666, "tan", false, 123);
-   // dao.insertUsuario(bd);
+    // dao.insertUsuario(bd);
     return dao.getAll();
   }
 }

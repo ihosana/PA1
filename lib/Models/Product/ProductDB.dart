@@ -3,7 +3,7 @@ import 'package:floor/floor.dart';
 @Entity()
 class ProductDB {
   @PrimaryKey(autoGenerate: true)
- 
+
   final int code;
   final String description;
   final double price;

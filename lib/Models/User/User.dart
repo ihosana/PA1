@@ -6,11 +6,11 @@ class User {
   final int password;
   User(
       {
-      required this.name,
-      required this.cpf,
-      required this.login,
-      required this.isAdm,
-      required this.password});
+        required this.name,
+        required this.cpf,
+        required this.login,
+        required this.isAdm,
+        required this.password});
 }
 
 

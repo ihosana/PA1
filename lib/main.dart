@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Pages/LoginPage/LoginPage.dart';
-import 'Pages/RoutingPage.dart';
+import 'Pages/RoutingPages/RoutingPage.dart';
 
 void main() {
   runApp(MaterialApp(

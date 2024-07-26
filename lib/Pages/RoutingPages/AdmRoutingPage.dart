@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'HomePage/HomePage.dart';
+import '../HomePage/HomePage.dart';
 
-class RoutingPage extends StatefulWidget {
+class AdmRoutingPage extends StatefulWidget {
   @override
-  _RoutingPageState createState() => _RoutingPageState();
+  _AdmRoutingPageState createState() => _AdmRoutingPageState();
 }
 
-class _RoutingPageState extends State<RoutingPage> {
+class _AdmRoutingPageState extends State<AdmRoutingPage> {
   int _selectedIndex = 0;
 
   final List<String> addresses = [
-    'Rua A, 123',
+    'ADM, 123',
     'Avenida B, 456',
     'Travessa C, 789',
     'Alameda D, 1011',
@@ -22,7 +22,7 @@ class _RoutingPageState extends State<RoutingPage> {
     HomePage(), // HomePage é o primeiro Widget
     Container(
       color: Colors.blue,
-      child: Center(child: Text('Busca')),
+      child: Center(child: Text('Produto')),
     ),
     Container(
       color: Colors.green,
@@ -84,8 +84,8 @@ class _RoutingPageState extends State<RoutingPage> {
               label: 'Início',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Busca',
+              icon: Icon(Icons.layers),
+              label: 'Produtos',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),

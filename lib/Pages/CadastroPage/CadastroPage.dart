@@ -26,8 +26,7 @@ class _CadastroScreenState extends State<CadastroPage> {
 
     dao.insertUser(novoUsuario);
 
-    // Você pode adicionar alguma lógica adicional após salvar o usuário, como exibir uma mensagem ou navegar para outra tela
-    Navigator.push(
+     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
@@ -100,7 +99,8 @@ class _CadastroScreenState extends State<CadastroPage> {
                               obscureText: true,
                             ),
                             SizedBox(height: 9.0),
-                            Row(
+                          /* Row(
+                              
                               children: [
                                 Checkbox(
                                   value: isAdm,
@@ -112,7 +112,8 @@ class _CadastroScreenState extends State<CadastroPage> {
                                 ),
                                 Text('Administrador'),
                               ],
-                            ),
+                            ), */
+                             
                           ],
                         ),
                       ),
