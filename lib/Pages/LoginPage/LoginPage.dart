@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Listar.dart';
 import 'package:pa1_activy/Pages/CadastroPage/CadastroPage.dart';
-import 'package:pa1_activy/Pages/RoutingPage.dart';
+import 'package:pa1_activy/Pages/RoutingPages/AdmRoutingPage.dart';
+import 'package:pa1_activy/Pages/RoutingPages/RoutingPage.dart';
 import 'package:pa1_activy/dataBase/DataBase.dart';
 
 class LoginPage extends StatelessWidget {
@@ -67,20 +68,20 @@ class LoginPage extends StatelessWidget {
                         onPressed: () => procurarUser(context),
                         child: Text('Entrar'),
                       ),
-                       ElevatedButton(
-                        onPressed: () => 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => CadastroPage()),
-                          ),
+                      ElevatedButton(
+                        onPressed: () =>
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CadastroPage()),
+                            ),
                         child: Text('Cadastrar'),
                       ),
-                       ElevatedButton(
-                        onPressed: () => 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Listar()),
-                          ),
+                      ElevatedButton(
+                        onPressed: () =>
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Listar()),
+                            ),
                         child: Text('lista'),
                       ),
                     ],
@@ -92,12 +93,13 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+
   }
 
   procurarUser(BuildContext context) async {
     final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
     final dao = appDatabase.usuarioDao;
-  
+
     // Obtenha o texto dos campos de texto
     final loginText = login.text;
     final passwordText = password.text;
@@ -105,26 +107,35 @@ class LoginPage extends StatelessWidget {
     // Busque o usuário pelo login e senha
     final usuarios = await dao.getAll();
     for (var i in usuarios) {
-        // Usuário encontrado, faça algo, como navegar para a próxima tela
-       if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==false)){
-           print('senha: ${i.password}, Nome: ${i.login}');
-            Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => RoutingPage()),
-                          );
-           return;
-           
-        }else{
-           print("error");
-          
-        }
-          
-  
-        
-      
+      // Usuário encontrado, faça algo, como navegar para a próxima tela
+      if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==false)){
+        print('senha: ${i.password}, Nome: ${i.login}');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RoutingPage()),
+        );
+        return;
+
+      }
+      if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==true)){
+        print('senha: ${i.password}, Nome: ${i.login}');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AdmRoutingPage()),
+        );
+        return;
+
+      }else{
+        print("error");
+
+      }
+
+
+
+
     }
 
     // Se não encontrar o usuário, exiba uma mensagem de erro
- 
+
   }
 }

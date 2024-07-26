@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:pa1_activy/Model/Product/Product.dart';// Importando a classe Product
-import 'package:pa1_activy/Model/Product/ProductDB.dart';
-import 'package:pa1_activy/dataBase/DataBase.dart';
+import 'package:pa1_activy/Model/Product/Product.dart';
 import 'Components/categories.dart'; // Importando os widgets RectangularItem e SquareItem
 
 class HomePage extends StatelessWidget {
   // Definindo a escala desejada para as imagens
   static const double imageScale = 0.15; // Reduzindo a escala da imagem
-   
+
   // Lista de produtos
   final List<Product> products = [
-   Product(name: 'Gaming', price: 100, imagePath: 'assets/gaming.png', description: 'Description for Product 1', category: 'Category 1', code: 12343),
-     // Adicione mais produtos conforme necessário
+    Product(name: 'Gaming', price: 100, imagePath: 'assets/gaming.png', description: 'Description for Product 1', category: 'Category 1', code: 12343),
+    // Adicione mais produtos conforme necessário
   ];
 
   @override

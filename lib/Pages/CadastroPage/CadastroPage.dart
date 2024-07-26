@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Pages/LoginPage/LoginPage.dart';
-import 'package:pa1_activy/dataBase/DataBase.dart';
-import 'package:pa1_activy/Model/User/UserDB.dart';
+import 'package:pa1_activy/dataBase/DataBase.dart'; // Importe o banco de dados aqui
+import 'package:pa1_activy/Model/User/UserDB.dart'; // Importe o modelo de usuário aqui
 
-class CadastroPage extends StatelessWidget {
+class CadastroPage extends StatefulWidget {
+  @override
+  _CadastroScreenState createState() => _CadastroScreenState();
+}
+
+class _CadastroScreenState extends State<CadastroPage> {
   final TextEditingController name = TextEditingController();
   final TextEditingController cpf = TextEditingController();
   final TextEditingController login = TextEditingController();
   bool isAdm = false;
   final TextEditingController password = TextEditingController();
+
+  // Método para salvar o usuário no banco de dados
+  void _saveUser() async {
+    final appDatabase =
+    await $FloorDataBase.databaseBuilder('DataBase.db').build();
+    final dao = appDatabase.usuarioDao;
+
+    var novoUsuario = UserDB(name.text, int.parse(cpf.text), login.text, isAdm,
+        int.parse(password.text));
+
+    dao.insertUser(novoUsuario);
+
+    // Você pode adicionar alguma lógica adicional após salvar o usuário, como exibir uma mensagem ou navegar para outra tela
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +99,15 @@ class CadastroPage extends StatelessWidget {
                               ),
                               obscureText: true,
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 9.0),
                             Row(
                               children: [
                                 Checkbox(
                                   value: isAdm,
                                   onChanged: (value) {
-                                    isAdm = value!;
+                                    setState(() {
+                                      isAdm = value!;
+                                    });
                                   },
                                 ),
                                 Text('Administrador'),
@@ -91,10 +116,13 @@ class CadastroPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () => _saveUser(context),
-                        child: Text('Cadastrar'),
+                      SizedBox(height: 45.0),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _saveUser,
+                          child: Text('Cadastrar'),
+                        ),
                       ),
                     ],
                   ),
@@ -106,24 +134,36 @@ class CadastroPage extends StatelessWidget {
       ),
     );
   }
-
-  void _saveUser(BuildContext context) async {
-    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
-    final dao = appDatabase.usuarioDao;
-
-    var novoUsuario = UserDB(
-      name.text,
-      int.parse(cpf.text),
-      login.text,
-      isAdm,
-      int.parse(password.text),
-    );
-
-    await dao.insertUser(novoUsuario);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-    );
-  }
 }
+
+
+
+
+
+/** SizedBox(height: 45.0),
+    SizedBox(
+    width: double.infinity,
+    child: ElevatedButton(
+    onPressed: _saveUser,
+    child: Text('Cadastrar'),
+    ),
+    ),
+
+
+
+
+    check
+    SizedBox(height: 9.0),
+    Row(
+    children: [
+    Checkbox(
+    value: isAdm,
+    onChanged: (value) {
+    setState(() {
+    isAdm = value!;
+    });
+    },
+    ),
+    Text('Administrador'),
+    ],
+    ),      */

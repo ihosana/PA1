@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/dataBase/DataBase.dart';
-import 'package:pa1_activy/Model/User/User.dart';
 import 'package:pa1_activy/Model/User/UserDB.dart';
-import 'package:pa1_activy/Model/User/UserDao.dart';
 
 class Listar extends StatelessWidget {
   const Listar({super.key});
@@ -14,7 +12,7 @@ class Listar extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.blue,
           title: const Text('Lista de Usuarios'),
-          
+
         ),
         body: FutureBuilder<List<UserDB>>(
           // Recupere a lista de produtos da DAO
@@ -35,20 +33,20 @@ class Listar extends StatelessWidget {
                 return ListTile(
                   title: Text(user.name+"isADM:"+user.isAdm.toString()),
                   subtitle: Text("Senha: "+user.password.toString()+", CPF:"+user.cpf.toString()),
-                  
+
                   // Adicione outros campos conforme necessário
                 );
               },
-              
-              
+
+
             );
           },
-          
-          
+
+
         ),
-        
+
       ),
-      
+
     );
   }
 
@@ -57,7 +55,7 @@ class Listar extends StatelessWidget {
     final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
     final dao = appDatabase.usuarioDao;
     //var bd= UsuarioBD(4,"Taniro", 666, "tan", false, 123);
-   // dao.insertUsuario(bd);
+    // dao.insertUsuario(bd);
     return dao.getAll();
   }
 }

@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:pa1_activy/Model/Product/Product.dart';
 import 'package:pa1_activy/Model/Sale/Sale.dart';
 //import 'package:http/http.dart' as http;
@@ -14,8 +11,8 @@ class ProductSale {
   final Sale sale;
   ProductSale(
       {required this.price,
-      required this.quantity,
-      required this.subTotal,
-      required this.product,
-      required this.sale});
+        required this.quantity,
+        required this.subTotal,
+        required this.product,
+        required this.sale});
 }

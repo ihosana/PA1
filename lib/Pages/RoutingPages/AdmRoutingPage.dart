@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'HomePage/HomePage.dart';
+import '../HomePage/HomePage.dart';
 
-class RoutingPage extends StatefulWidget {
+class AdmRoutingPage extends StatefulWidget {
   @override
-  _RoutingPageState createState() => _RoutingPageState();
+  _AdmRoutingPageState createState() => _AdmRoutingPageState();
 }
 
-class _RoutingPageState extends State<RoutingPage> {
+class _AdmRoutingPageState extends State<AdmRoutingPage> {
   int _selectedIndex = 0;
 
   final List<String> addresses = [
