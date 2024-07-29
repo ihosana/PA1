@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Crie páginas separadas para Produtos, Transações e Análises
+// Crie páginas separadas para Produtos, Transações e Análises.
 class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
