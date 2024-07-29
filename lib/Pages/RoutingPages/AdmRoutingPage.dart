@@ -1,6 +1,54 @@
 import 'package:flutter/material.dart';
 
-import '../HomePage/HomePage.dart';
+// Crie páginas separadas para Produtos, Transações e Análises
+class ProductsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Cadastro de Produtos',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class TransactionsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Transações Financeiras',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class AnalysisPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Análises de Dados',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: AdmRoutingPage(),
+    );
+  }
+}
 
 class AdmRoutingPage extends StatefulWidget {
   @override
@@ -10,28 +58,12 @@ class AdmRoutingPage extends StatefulWidget {
 class _AdmRoutingPageState extends State<AdmRoutingPage> {
   int _selectedIndex = 0;
 
-  final List<String> addresses = [
-    'Rua A, 123',
-    'Avenida B, 456',
-    'Travessa C, 789',
-    'Alameda D, 1011',
-  ];
-
   // Lista de widgets que serão chamados pela BottomNavigationBar
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(), // HomePage é o primeiro Widget
-    Container(
-      color: Colors.blue,
-      child: Center(child: Text('Busca')),
-    ),
-    Container(
-      color: Colors.green,
-      child: Center(child: Text('Carrinho')),
-    ),
-    Container(
-      color: Colors.orange,
-      child: Center(child: Text('Opções')),
-    ),
+    ProductsPage(),
+    TransactionsPage(),
+    AnalysisPage(),
   ];
 
   @override
@@ -46,18 +78,14 @@ class _AdmRoutingPageState extends State<AdmRoutingPage> {
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
-                addresses[0],
+                'Administrador',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 18,
                   color: Colors.black, // Define a cor do texto como preto
                 ),
               ),
             ),
-            Icon(
-              Icons.arrow_drop_down, // Ícone de seta para baixo para selecionar o endereço
-              color: Colors.black, // Define a cor da seta como preto
-            ),
-            Spacer(), // Adiciona um espaço flexível entre o texto do endereço e os ícones
+            Spacer(), // Adiciona um espaço flexível entre o texto do título e os ícones
             IconButton(
               icon: Icon(Icons.notifications), // Ícone de sino no canto direito
               onPressed: () {
@@ -84,16 +112,16 @@ class _AdmRoutingPageState extends State<AdmRoutingPage> {
               label: 'Início',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Busca',
+              icon: Icon(Icons.shopping_basket),
+              label: 'Produtos',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Carrinho',
+              icon: Icon(Icons.swap_vert),
+              label: 'Transações',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Opções',
+              icon: Icon(Icons.analytics),
+              label: 'Análises',
             ),
           ],
         ),
@@ -105,5 +133,45 @@ class _AdmRoutingPageState extends State<AdmRoutingPage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+}
+
+// Página inicial com exemplos estáticos dos dashboards
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Resumo de Vendas',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0), // Definindo bordas arredondadas
+            child: Image.asset(
+              'assets/column.png', // Caminho da imagem
+              width: 300,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            'Produtos em Destaque',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0), // Definindo bordas arredondadas
+            child: Image.asset(
+              'assets/column.png', // Caminho da imagem
+              width: 300,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
