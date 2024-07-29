@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Pages/LoginPage/LoginPage.dart';
 import 'package:pa1_activy/dataBase/DataBase.dart'; // Importe o banco de dados aqui
-import 'package:pa1_activy/Model/User/UserDB.dart'; // Importe o modelo de usuário aqui
+import 'package:pa1_activy/Models/User/UserDB.dart'; // Importe o modelo de usuário aqui
 
 class CadastroPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _CadastroScreenState extends State<CadastroPage> {
   // Método para salvar o usuário no banco de dados
   void _saveUser() async {
     final appDatabase =
-    await $FloorDataBase.databaseBuilder('DataBase.db').build();
+        await $FloorDataBase.databaseBuilder('DataBase.db').build();
     final dao = appDatabase.usuarioDao;
 
     var novoUsuario = UserDB(name.text, int.parse(cpf.text), login.text, isAdm,
@@ -26,8 +26,7 @@ class _CadastroScreenState extends State<CadastroPage> {
 
     dao.insertUser(novoUsuario);
 
-    // Você pode adicionar alguma lógica adicional após salvar o usuário, como exibir uma mensagem ou navegar para outra tela
-    Navigator.push(
+     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
@@ -100,7 +99,8 @@ class _CadastroScreenState extends State<CadastroPage> {
                               obscureText: true,
                             ),
                             SizedBox(height: 9.0),
-                            Row(
+                          /* Row(
+                              
                               children: [
                                 Checkbox(
                                   value: isAdm,
@@ -112,7 +112,8 @@ class _CadastroScreenState extends State<CadastroPage> {
                                 ),
                                 Text('Administrador'),
                               ],
-                            ),
+                            ), */
+                             
                           ],
                         ),
                       ),
@@ -141,29 +142,29 @@ class _CadastroScreenState extends State<CadastroPage> {
 
 
 /** SizedBox(height: 45.0),
-    SizedBox(
-    width: double.infinity,
-    child: ElevatedButton(
-    onPressed: _saveUser,
-    child: Text('Cadastrar'),
-    ),
-    ),
-
-
-
-
-    check
-    SizedBox(height: 9.0),
-    Row(
-    children: [
-    Checkbox(
-    value: isAdm,
-    onChanged: (value) {
-    setState(() {
-    isAdm = value!;
-    });
-    },
-    ),
-    Text('Administrador'),
-    ],
-    ),      */
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _saveUser,
+                child: Text('Cadastrar'),
+              ),
+            ), 
+            
+            
+            
+            
+      check
+        SizedBox(height: 9.0),
+            Row(
+              children: [
+                Checkbox(
+                  value: isAdm,
+                  onChanged: (value) {
+                    setState(() {
+                      isAdm = value!;
+                    });
+                  },
+                ),
+                Text('Administrador'),
+              ],
+            ),      */

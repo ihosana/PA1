@@ -93,7 +93,6 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-
   }
 
   procurarUser(BuildContext context) async {

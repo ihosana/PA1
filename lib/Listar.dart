@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/dataBase/DataBase.dart';
-import 'package:pa1_activy/Model/User/UserDB.dart';
+import 'package:pa1_activy/Models/User/UserDB.dart';
 
 class Listar extends StatelessWidget {
   const Listar({super.key});
@@ -31,7 +31,7 @@ class Listar extends StatelessWidget {
               itemBuilder: (context, index) {
                 UserDB user = snapshot.data![index];
                 return ListTile(
-                  title: Text(user.name+"isADM:"+user.isAdm.toString()),
+                  title: Text(user.login+"isADM:"+user.isAdm.toString()),
                   subtitle: Text("Senha: "+user.password.toString()+", CPF:"+user.cpf.toString()),
 
                   // Adicione outros campos conforme necessário

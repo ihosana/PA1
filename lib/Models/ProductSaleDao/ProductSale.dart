@@ -1,5 +1,6 @@
-import 'package:pa1_activy/Model/Product/Product.dart';
-import 'package:pa1_activy/Model/Sale/Sale.dart';
+import 'package:pa1_activy/Models/Product/Product.dart';
+import 'package:pa1_activy/Models/Sale/Sale.dart';
+
 //import 'package:http/http.dart' as http;
 //import 'package:json_annotation/json_annotation.dart';
 

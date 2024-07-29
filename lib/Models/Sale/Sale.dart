@@ -1,4 +1,4 @@
-import 'package:pa1_activy/Model/User/User.dart';
+import 'package:pa1_activy/Models/User/User.dart';
 
 class Sale {
   final int numero;
@@ -7,7 +7,7 @@ class Sale {
   final User user;
   Sale(
       {required this.numero,
-        required this.dataVenda,
-        required this.observacoes,
-        required this.user});
+      required this.dataVenda,
+      required this.observacoes,
+      required this.user});
 }

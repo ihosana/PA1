@@ -1,5 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:pa1_activy/Model/Product/ProductDB.dart';
+import 'package:pa1_activy/Models/Product/ProductDB.dart';
 
 @dao
 abstract class ProductDao {

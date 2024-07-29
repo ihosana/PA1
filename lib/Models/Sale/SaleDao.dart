@@ -1,5 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:pa1_activy/Model/Sale/Sale.dart';
+import 'package:pa1_activy/Models/Sale/Sale.dart';
 
 @dao
 abstract class SaleDao {

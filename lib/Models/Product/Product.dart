@@ -1,8 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:floor/floor.dart';
-//import 'package:http/http.dart' as http;
-//import 'package:json_annotation/json_annotation.dart';
 
 class Product {
   final String name;
