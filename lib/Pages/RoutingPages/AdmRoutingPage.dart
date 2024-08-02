@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pa1_activy/Pages/CadastroProduto/CadastroProduto.dart';
 
 // Crie páginas separadas para Produtos, Transações e Análises.
 class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Cadastro de Produtos',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
+    return CadastroProduto();
   }
 }
 

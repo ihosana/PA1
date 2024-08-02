@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DataBase.dart';
+part of 'DataBase2.dart';
 
 // **************************************************************************
 // FloorGenerator
@@ -88,7 +88,7 @@ class _$DataBase extends DataBase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `UserDB` (`name` TEXT NOT NULL, `cpf` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `login` TEXT NOT NULL, `isAdm` INTEGER NOT NULL, `password` INTEGER NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `ProductDB` (`code` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `description` TEXT NOT NULL, `price` REAL NOT NULL, `imagePath` TEXT NOT NULL, `category` TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `ProductDB` (`name` TEXT NOT NULL, `code` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `description` TEXT NOT NULL, `price` REAL NOT NULL, `imagePath` TEXT NOT NULL, `category` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -194,6 +194,7 @@ class _$ProductDao extends ProductDao {
             database,
             'ProductDB',
             (ProductDB item) => <String, Object?>{
+                  'name': item.name,
                   'code': item.code,
                   'description': item.description,
                   'price': item.price,
@@ -205,6 +206,7 @@ class _$ProductDao extends ProductDao {
             'ProductDB',
             ['code'],
             (ProductDB item) => <String, Object?>{
+                  'name': item.name,
                   'code': item.code,
                   'description': item.description,
                   'price': item.price,
@@ -216,6 +218,7 @@ class _$ProductDao extends ProductDao {
             'ProductDB',
             ['code'],
             (ProductDB item) => <String, Object?>{
+                  'name': item.name,
                   'code': item.code,
                   'description': item.description,
                   'price': item.price,
@@ -239,6 +242,7 @@ class _$ProductDao extends ProductDao {
   Future<List<ProductDB>> getAll() async {
     return _queryAdapter.queryList('SELECT * FROM ProductDB',
         mapper: (Map<String, Object?> row) => ProductDB(
+            row['name'] as String,
             row['code'] as int,
             row['description'] as String,
             row['price'] as double,

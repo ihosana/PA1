@@ -4,7 +4,7 @@ import 'package:pa1_activy/Listar.dart';
 import 'package:pa1_activy/Pages/CadastroPage/CadastroPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/AdmRoutingPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/RoutingPage.dart';
-import 'package:pa1_activy/dataBase/DataBase.dart';
+import 'package:pa1_activy/dataBase/DataBase2.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController password = TextEditingController();
