@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pa1_activy/Pages/User/Cart_Page/Cart_Page.dart';
 
 import '../HomePage/HomePage.dart';
 
@@ -24,10 +25,7 @@ class _RoutingPageState extends State<RoutingPage> {
       color: Colors.blue,
       child: Center(child: Text('Busca')),
     ),
-    Container(
-      color: Colors.green,
-      child: Center(child: Text('Carrinho')),
-    ),
+    CartScreen(),
     Container(
       color: Colors.orange,
       child: Center(child: Text('Opções')),
