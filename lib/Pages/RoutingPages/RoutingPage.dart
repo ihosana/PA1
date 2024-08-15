@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Pages/listarP.dart';
-
+import 'package:pa1_activy/Pages/User/Cart_Page/Cart_Page.dart';
 import '../HomePage/HomePage.dart';
 
 class RoutingPage extends StatefulWidget {
@@ -21,17 +21,13 @@ class _RoutingPageState extends State<RoutingPage> {
   // Lista de widgets que serão chamados pela BottomNavigationBar
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(), // HomePage é o primeiro Widget
-    Container(
+   Container(
       color: Colors.transparent,
       child: ListarP(),
-    ),
+    ), 
+   
     Container(
-      color: Colors.green,
-      child: Center(child: Text('Carrinho')),
-    ),
-    Container(
-      color: Colors.orange,
-      child: Center(child: Text('Opções')),
+      child: CartScreen(),
     ),
   ];
 
