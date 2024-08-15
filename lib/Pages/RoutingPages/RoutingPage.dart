@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pa1_activy/Pages/listarP.dart';
 
 import '../HomePage/HomePage.dart';
 
@@ -21,8 +22,8 @@ class _RoutingPageState extends State<RoutingPage> {
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(), // HomePage é o primeiro Widget
     Container(
-      color: Colors.blue,
-      child: Center(child: Text('Busca')),
+      color: Colors.transparent,
+      child: ListarP(),
     ),
     Container(
       color: Colors.green,

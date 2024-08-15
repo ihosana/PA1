@@ -3,12 +3,12 @@ import 'package:pa1_activy/Pages/LoginPage/LoginPage.dart';
 import 'package:pa1_activy/dataBase/DataBase3.dart'; // Importe o banco de dados aqui
 import 'package:pa1_activy/Models/User/UserDB.dart'; // Importe o modelo de usuário aqui
 
-class CadastroPage extends StatefulWidget {
+class CadastroAdm extends StatefulWidget {
   @override
-  _CadastroScreenState createState() => _CadastroScreenState();
+  _CadastroScreenStateAdm createState() => _CadastroScreenStateAdm();
 }
 
-class _CadastroScreenState extends State<CadastroPage> {
+class _CadastroScreenStateAdm extends State<CadastroAdm> {
   final TextEditingController name = TextEditingController();
   final TextEditingController cpf = TextEditingController();
   final TextEditingController login = TextEditingController();
@@ -23,13 +23,14 @@ class _CadastroScreenState extends State<CadastroPage> {
 
     var novoUsuario = UserDB(name.text, int.parse(cpf.text), login.text, isAdm,
         int.parse(password.text));
-
+   
     dao.insertUser(novoUsuario);
-    print("cadastrou");
-    Navigator.push(
+   print("cadastrou");
+     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
+  
   }
 
   @override
@@ -54,14 +55,7 @@ class _CadastroScreenState extends State<CadastroPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Image.asset(
-                          'assets/logo.png',
-                          width: 150,
-                          height: 150,
-                        ),
-                      ),
+                     
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Column(
@@ -99,7 +93,7 @@ class _CadastroScreenState extends State<CadastroPage> {
                               obscureText: true,
                             ),
                             SizedBox(height: 9.0),
-                            /* Row(
+                          Row(
                               
                               children: [
                                 Checkbox(
@@ -112,7 +106,8 @@ class _CadastroScreenState extends State<CadastroPage> {
                                 ),
                                 Text('Administrador'),
                               ],
-                            ),*/
+                            ),
+                             
                           ],
                         ),
                       ),
@@ -120,7 +115,7 @@ class _CadastroScreenState extends State<CadastroPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: _saveUser,
+                          onPressed:()=>{},
                           child: Text('Cadastrar'),
                         ),
                       ),

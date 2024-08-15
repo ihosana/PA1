@@ -14,4 +14,8 @@ abstract class ProductDao {
 
   @delete
   Future<void> deleteProduct(ProductDB product);
+
+  @Query('SELECT * FROM ProductDB WHERE name LIKE :searchQuery')
+  Future<List<ProductDB>> findProductsByName(String searchQuery);
+
 }

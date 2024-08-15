@@ -118,6 +118,7 @@ class _AdmRoutingPageState extends State<AdmRoutingPage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.analytics),
               label: 'Análises',
+              
             ),
           ],
         ),

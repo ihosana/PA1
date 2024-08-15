@@ -4,7 +4,7 @@ import 'package:pa1_activy/Listar.dart';
 import 'package:pa1_activy/Pages/CadastroPage/CadastroPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/AdmRoutingPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/RoutingPage.dart';
-import 'package:pa1_activy/dataBase/DataBase2.dart';
+import 'package:pa1_activy/dataBase/DataBase3.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController password = TextEditingController();
@@ -96,7 +96,7 @@ class LoginPage extends StatelessWidget {
   }
 
   procurarUser(BuildContext context) async {
-    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase.db').build();
+    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase3.db').build();
     final dao = appDatabase.usuarioDao;
 
     // Obtenha o texto dos campos de texto
@@ -113,7 +113,6 @@ class LoginPage extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => RoutingPage()),
         );
-        return;
 
       }
       if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==true)){
@@ -122,7 +121,6 @@ class LoginPage extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => AdmRoutingPage()),
         );
-        return;
 
       }else{
         print("error");

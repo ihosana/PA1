@@ -1,25 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DataBase2.dart';
+part of 'DataBase3.dart';
 
 // **************************************************************************
 // FloorGenerator
 // **************************************************************************
 
+abstract class $DataBaseBuilderContract {
+  /// Adds migrations to the builder.
+  $DataBaseBuilderContract addMigrations(List<Migration> migrations);
+
+  /// Adds a database [Callback] to the builder.
+  $DataBaseBuilderContract addCallback(Callback callback);
+
+  /// Creates the database and initializes it.
+  Future<DataBase> build();
+}
+
 // ignore: avoid_classes_with_only_static_members
 class $FloorDataBase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$DataBaseBuilder databaseBuilder(String name) =>
+  static $DataBaseBuilderContract databaseBuilder(String name) =>
       _$DataBaseBuilder(name);
 
   /// Creates a database builder for an in memory database.
   /// Information stored in an in memory database disappears when the process is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$DataBaseBuilder inMemoryDatabaseBuilder() => _$DataBaseBuilder(null);
+  static $DataBaseBuilderContract inMemoryDatabaseBuilder() =>
+      _$DataBaseBuilder(null);
 }
 
-class _$DataBaseBuilder {
+class _$DataBaseBuilder implements $DataBaseBuilderContract {
   _$DataBaseBuilder(this.name);
 
   final String? name;
@@ -28,19 +40,19 @@ class _$DataBaseBuilder {
 
   Callback? _callback;
 
-  /// Adds migrations to the builder.
-  _$DataBaseBuilder addMigrations(List<Migration> migrations) {
+  @override
+  $DataBaseBuilderContract addMigrations(List<Migration> migrations) {
     _migrations.addAll(migrations);
     return this;
   }
 
-  /// Adds a database [Callback] to the builder.
-  _$DataBaseBuilder addCallback(Callback callback) {
+  @override
+  $DataBaseBuilderContract addCallback(Callback callback) {
     _callback = callback;
     return this;
   }
 
-  /// Creates the database and initializes it.
+  @override
   Future<DataBase> build() async {
     final path = name != null
         ? await sqfliteDatabaseFactory.getDatabasePath(name!)
@@ -248,6 +260,19 @@ class _$ProductDao extends ProductDao {
             row['price'] as double,
             row['imagePath'] as String,
             row['category'] as String));
+  }
+
+  @override
+  Future<List<ProductDB>> findProductsByName(String searchQuery) async {
+    return _queryAdapter.queryList('SELECT * FROM ProductDB WHERE name LIKE ?1',
+        mapper: (Map<String, Object?> row) => ProductDB(
+            row['name'] as String,
+            row['code'] as int,
+            row['description'] as String,
+            row['price'] as double,
+            row['imagePath'] as String,
+            row['category'] as String),
+        arguments: [searchQuery]);
   }
 
   @override

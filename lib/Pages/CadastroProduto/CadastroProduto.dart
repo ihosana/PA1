@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart'; // Certifique-se de que o pacote intl está importado
 import 'package:pa1_activy/Models/Product/ProductDB.dart';
-import 'package:pa1_activy/Pages/CadastroPage/CadastroPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/AdmRoutingPage.dart';
-import 'package:pa1_activy/dataBase/DataBase2.dart';
+import 'package:pa1_activy/dataBase/DataBase3.dart';
 
 class CadastroProduto extends StatefulWidget {
   @override
@@ -26,7 +24,7 @@ class _CadastroPro extends State<CadastroProduto> {
   // Método para salvar o usuário no banco de dados
   void _saveProduct() async {
     final appDatabase =
-        await $FloorDataBase.databaseBuilder('DataBase2.db').build();
+        await $FloorDataBase.databaseBuilder('DataBase3.db').build();
     final dao = appDatabase.productDao;
 
     // Remove tudo que não é dígito ou vírgula
@@ -48,7 +46,15 @@ class _CadastroPro extends State<CadastroProduto> {
    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AdmRoutingPage()),
+
     );
+    /**
+     *    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ListarP()),
+      
+    );
+     */
   }
 
   @override
@@ -161,8 +167,6 @@ class _CadastroPro extends State<CadastroProduto> {
 
 // Formatter personalizado para adicionar vírgula
 class _CurrencyInputFormatter extends TextInputFormatter {
-  final NumberFormat _formatter = NumberFormat.simpleCurrency(locale: 'pt_BR', name: 'BRL');
-
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     // Remove tudo que não for dígito
@@ -174,7 +178,7 @@ class _CurrencyInputFormatter extends TextInputFormatter {
     if (length > 2) {
       formattedText = newText.substring(0, length - 2) + ',' + newText.substring(length - 2);
     } else {
-      formattedText = '0,' + newText.padLeft(2, '0');
+      formattedText = newText.padLeft(2)+",0";
     }
 
     // Formata o texto final
@@ -185,9 +189,8 @@ class _CurrencyInputFormatter extends TextInputFormatter {
         buffer.write('.');
       }
       buffer.write(formattedText[i]);
-      index++;
+      index;
     }
-
     // Retorna o novo valor formatado
     return newValue.copyWith(
       text: buffer.toString().split('').reversed.join(), // Reverte a string final
