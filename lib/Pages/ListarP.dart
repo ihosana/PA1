@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pa1_activy/dataBase/DataBase3.dart';
 import 'package:pa1_activy/Models/Product/ProductDB.dart';
+import 'package:pa1_activy/Pages/User/Car_manage/CartManager.dart';
+import 'package:pa1_activy/dataBase/DataBase3.dart';
 
 class ListarP extends StatefulWidget {
   const ListarP({super.key});
@@ -10,17 +11,12 @@ class ListarP extends StatefulWidget {
 }
 
 class _ListarPState extends State<ListarP> {
-  // Controlador do TextField
   final TextEditingController _searchController = TextEditingController();
   String searchQuery = "";
-
-  // Mapa para armazenar a quantidade de cada produto no carrinho
-  Map<int, int> cartQuantities = {};
 
   @override
   void initState() {
     super.initState();
-    // Adiciona um listener para atualizar a consulta de pesquisa
     _searchController.addListener(() {
       setState(() {
         searchQuery = _searchController.text;
@@ -69,13 +65,15 @@ class _ListarPState extends State<ListarP> {
             );
           }
 
-          // Filtra a lista de produtos com base na consulta de pesquisa
           List<ProductDB> filteredProducts = snapshot.data!;
-            const id=0;
+          final cartManager = CartManager(); // Obtenha a instância do CartManager
+
           return ListView.builder(
             itemCount: filteredProducts.length,
             itemBuilder: (context, index) {
               ProductDB product = filteredProducts[index];
+              int quantity = cartManager.cartQuantities[product.code] ?? 0;
+
               return Card(
                 margin: EdgeInsets.all(8.0),
                 child: ListTile(
@@ -88,10 +86,39 @@ class _ListarPState extends State<ListarP> {
                   ),
                   title: Text(product.name),
                   subtitle: Text("R\$ ${product.price.toStringAsFixed(2)}"),
-                  trailing: IconButton(
+                  trailing: quantity > 0
+                      ? Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.remove),
+                              onPressed: () {
+                                setState(() {
+                                  cartManager.removeProduct(product.code);
+                                });
+                              },
+                            ),
+                            Text(
+                              '$quantity',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  cartManager.addProduct(product.code);
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      : IconButton(
                           icon: Icon(Icons.shopping_cart, color: Colors.blue),
                           onPressed: () {
-                     //       _updateQuantity(product.id, 1);
+                            setState(() {
+                              cartManager.addProduct(product.code);
+                              
+                            });
                           },
                         ),
                 ),
@@ -103,27 +130,7 @@ class _ListarPState extends State<ListarP> {
     );
   }
 
-  void _updateQuantity(int productId, int change) {
-    setState(() {
-      // Atualiza a quantidade no mapa
-      final currentQuantity = cartQuantities[productId] ?? 0;
-      final newQuantity = currentQuantity + change;
-
-      if (newQuantity > 0) {
-        cartQuantities[productId] = newQuantity;
-      } else {
-        cartQuantities.remove(productId);
-      }
-    });
-  }
-
-  Future<List<ProductDB>> _loadProductData() async {
-    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase3.db').build();
-    final dao = appDatabase.productDao;
-    return dao.getAll();
-  }
-
-  Future<List<ProductDB>> findProduct(nome) async {
+  Future<List<ProductDB>> findProduct(String nome) async {
     final appDatabase = await $FloorDataBase.databaseBuilder('DataBase3.db').build();
     final dao = appDatabase.productDao;
     return dao.findProductsByName(nome);

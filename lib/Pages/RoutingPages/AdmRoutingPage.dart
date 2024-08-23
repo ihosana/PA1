@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pa1_activy/Pages/CadastroProduto/CadastroProduto.dart';
+import 'package:pa1_activy/Pages/Admin/CadastroProduto/CadastroProduto.dart';
 
 // Crie páginas separadas para Produtos, Transações e Análises.
 class ProductsPage extends StatelessWidget {

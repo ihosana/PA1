@@ -21,11 +21,11 @@ class _RoutingPageState extends State<RoutingPage> {
   // Lista de widgets que serão chamados pela BottomNavigationBar
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(), // HomePage é o primeiro Widget
-   Container(
+    Container(
       color: Colors.transparent,
       child: ListarP(),
-    ), 
-   
+    ),
+
     Container(
       child: CartScreen(),
     ),
@@ -46,29 +46,30 @@ class _RoutingPageState extends State<RoutingPage> {
                 addresses[0],
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.black, // Define a cor do texto como preto
+                  color: Colors.black,
                 ),
               ),
             ),
             Icon(
-              Icons.arrow_drop_down, // Ícone de seta para baixo para selecionar o endereço
-              color: Colors.black, // Define a cor da seta como preto
+              Icons.arrow_drop_down,
+              color: Colors.black,
             ),
-            Spacer(), // Adiciona um espaço flexível entre o texto do endereço e os ícones
+            Spacer(),
             IconButton(
-              icon: Icon(Icons.notifications), // Ícone de sino no canto direito
-              onPressed: () {
-                // Adicione sua lógica para ação do ícone de sino aqui
-              },
-              color: Colors.black, // Define a cor do ícone do sino como preto
-            ),
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                 
+                },
+                color: Colors.black),
           ],
         ),
       ),
-      body: _widgetOptions[_selectedIndex], // Mostra o widget selecionado pelo BottomNavigationBar
+      body: _widgetOptions[
+          _selectedIndex], // Mostra o widget selecionado pelo BottomNavigationBar
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors.white, // Definindo a cor de fundo da BottomNavigationBar como branco
+          canvasColor: Colors
+              .white, // Definindo a cor de fundo da BottomNavigationBar como branco
         ),
         child: BottomNavigationBar(
           selectedItemColor: Colors.black,

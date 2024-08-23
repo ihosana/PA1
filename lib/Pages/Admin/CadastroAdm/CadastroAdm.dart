@@ -12,7 +12,7 @@ class _CadastroScreenStateAdm extends State<CadastroAdm> {
   final TextEditingController name = TextEditingController();
   final TextEditingController cpf = TextEditingController();
   final TextEditingController login = TextEditingController();
-  bool isAdm = false;
+  bool isAdm = true;
   final TextEditingController password = TextEditingController();
 
   // Método para salvar o usuário no banco de dados

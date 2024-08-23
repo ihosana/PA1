@@ -17,36 +17,32 @@ class _CadastroPro extends State<CadastroProduto> {
   String selectedCategory = 'Eletrônicos'; // Valor inicial para o dropdown
 
   // Lista de categorias
-  final List<String> categories = ['Eletrônicos', 'Periféricos', 'Monitores', 'Smartphones'];
+  final List<String> categories = [
+    'Eletrônicos',
+    'Periféricos',
+    'Monitores',
+    'Smartphones'
+  ];
 
   final String imagePath = " image";
 
-  // Método para salvar o usuário no banco de dados
+  // Método para salvar o produto no banco de dados
   void _saveProduct() async {
     final appDatabase =
         await $FloorDataBase.databaseBuilder('DataBase3.db').build();
     final dao = appDatabase.productDao;
-
+    //Formatação do price
     // Remove tudo que não é dígito ou vírgula
     String priceText = price.text.replaceAll(RegExp(r'[^\d,]'), '');
     // Substitui a vírgula por ponto para a conversão
     double priceValue = double.tryParse(priceText.replaceAll(',', '.')) ?? 0;
 
-    var novoProduto = ProductDB(
-      
-      name.text,
-      int.parse(code.text),
-      description.text,
-      priceValue,
-      imagePath,
-      selectedCategory
-      
-    );
+    var novoProduto = ProductDB(name.text, int.parse(code.text),
+        description.text, priceValue, imagePath, selectedCategory);
     dao.insertProduct(novoProduto);
-   Navigator.push(
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AdmRoutingPage()),
-
     );
     /**
      *    Navigator.push(
@@ -64,14 +60,6 @@ class _CadastroPro extends State<CadastroProduto> {
       theme: ThemeData.dark(),
       home: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
-            // Se quiser adicionar um gradiente, descomente as linhas abaixo
-            // gradient: LinearGradient(
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            //   colors: [Colors.black, Colors.grey[900]!],
-            // ),
-          ),
           child: Stack(
             children: [
               Center(
@@ -117,7 +105,8 @@ class _CadastroPro extends State<CadastroProduto> {
                                 labelText: 'Preço',
                                 prefixIcon: Icon(Icons.attach_money),
                               ),
-                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
                               inputFormatters: [
                                 _CurrencyInputFormatter(), // Usar formatter personalizado
                               ],
@@ -149,7 +138,9 @@ class _CadastroPro extends State<CadastroProduto> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () { _saveProduct(); },
+                          onPressed: () {
+                            _saveProduct();
+                          },
                           child: Text('Cadastrar'),
                         ),
                       ),
@@ -168,7 +159,8 @@ class _CadastroPro extends State<CadastroProduto> {
 // Formatter personalizado para adicionar vírgula
 class _CurrencyInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     // Remove tudo que não for dígito
     String newText = newValue.text.replaceAll(RegExp(r'[^\d]'), '');
 
@@ -176,9 +168,11 @@ class _CurrencyInputFormatter extends TextInputFormatter {
     String formattedText = '';
     int length = newText.length;
     if (length > 2) {
-      formattedText = newText.substring(0, length - 2) + ',' + newText.substring(length - 2);
+      formattedText = newText.substring(0, length - 2) +
+          ',' +
+          newText.substring(length - 2);
     } else {
-      formattedText = newText.padLeft(2)+",0";
+      formattedText = newText.padLeft(2) + ",0";
     }
 
     // Formata o texto final
@@ -193,7 +187,8 @@ class _CurrencyInputFormatter extends TextInputFormatter {
     }
     // Retorna o novo valor formatado
     return newValue.copyWith(
-      text: buffer.toString().split('').reversed.join(), // Reverte a string final
+      text:
+          buffer.toString().split('').reversed.join(),
       selection: TextSelection.collapsed(offset: buffer.length),
     );
   }

@@ -15,7 +15,7 @@ class _CadastroScreenState extends State<CadastroPage> {
   bool isAdm = false;
   final TextEditingController password = TextEditingController();
 
-  // Método para salvar o usuário no banco de dados
+  // Método para salvar o usuário
   void _saveUser() async {
     final appDatabase =
         await $FloorDataBase.databaseBuilder('DataBase3.db').build();
@@ -99,20 +99,6 @@ class _CadastroScreenState extends State<CadastroPage> {
                               obscureText: true,
                             ),
                             SizedBox(height: 9.0),
-                            /* Row(
-                              
-                              children: [
-                                Checkbox(
-                                  value: isAdm,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isAdm = value!;
-                                    });
-                                  },
-                                ),
-                                Text('Administrador'),
-                              ],
-                            ),*/
                           ],
                         ),
                       ),
@@ -135,35 +121,3 @@ class _CadastroScreenState extends State<CadastroPage> {
     );
   }
 }
-
-
-
-
-
-/** SizedBox(height: 45.0),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _saveUser,
-                child: Text('Cadastrar'),
-              ),
-            ), 
-            
-            
-            
-            
-      check
-        SizedBox(height: 9.0),
-            Row(
-              children: [
-                Checkbox(
-                  value: isAdm,
-                  onChanged: (value) {
-                    setState(() {
-                      isAdm = value!;
-                    });
-                  },
-                ),
-                Text('Administrador'),
-              ],
-            ),      */
