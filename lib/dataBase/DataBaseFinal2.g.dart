@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DataBaseFinal1.dart';
+part of 'DataBaseFinal2.dart';
 
 // **************************************************************************
 // FloorGenerator
@@ -106,9 +106,9 @@ class _$DataBase extends DataBase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `ProductDB` (`name` TEXT NOT NULL, `code` INTEGER NOT NULL, `description` TEXT NOT NULL, `price` REAL NOT NULL, `imagePath` TEXT NOT NULL, `category` TEXT NOT NULL, PRIMARY KEY (`code`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `ProductSaleDB` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `quantity` INTEGER NOT NULL, `subTotal` INTEGER NOT NULL, `product_id` INTEGER NOT NULL, `sale_id` INTEGER NOT NULL, FOREIGN KEY (`product_id`) REFERENCES `ProductDB` (`code`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`sale_id`) REFERENCES `product_sale` (`numero`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+            'CREATE TABLE IF NOT EXISTS `ProductSaleDB` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `quantity` INTEGER NOT NULL, `subTotal` INTEGER NOT NULL, `product_id` INTEGER NOT NULL, `sale_id` INTEGER NOT NULL, FOREIGN KEY (`product_id`) REFERENCES `ProductDB` (`code`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`sale_id`) REFERENCES `SaleDB` (`numero`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `product_sale` (`numero` INTEGER NOT NULL, `dataVenda` TEXT NOT NULL, `user` INTEGER NOT NULL, FOREIGN KEY (`user`) REFERENCES `UserDB` (`cpf`) ON UPDATE NO ACTION ON DELETE NO ACTION, PRIMARY KEY (`numero`))');
+            'CREATE TABLE IF NOT EXISTS `SaleDB` (`numero` INTEGER PRIMARY KEY AUTOINCREMENT, `dataVenda` TEXT NOT NULL, `user` INTEGER NOT NULL, FOREIGN KEY (`user`) REFERENCES `UserDB` (`cpf`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -365,7 +365,7 @@ class _$ProductSaleDao extends ProductSaleDao {
   Future<List<ProductSaleDB>> getAll() async {
     return _queryAdapter.queryList('SELECT * FROM ProductSaleDB',
         mapper: (Map<String, Object?> row) => ProductSaleDB(
-            row['id'] as int,
+            row['id'] as int?,
             row['quantity'] as int,
             row['subTotal'] as int,
             row['product_id'] as int,
@@ -397,7 +397,7 @@ class _$SaleDao extends SaleDao {
   )   : _queryAdapter = QueryAdapter(database),
         _saleDBInsertionAdapter = InsertionAdapter(
             database,
-            'product_sale',
+            'SaleDB',
             (SaleDB item) => <String, Object?>{
                   'numero': item.numero,
                   'dataVenda': item.dataVenda,
@@ -405,7 +405,7 @@ class _$SaleDao extends SaleDao {
                 }),
         _saleDBUpdateAdapter = UpdateAdapter(
             database,
-            'product_sale',
+            'SaleDB',
             ['numero'],
             (SaleDB item) => <String, Object?>{
                   'numero': item.numero,
@@ -414,7 +414,7 @@ class _$SaleDao extends SaleDao {
                 }),
         _saleDBDeletionAdapter = DeletionAdapter(
             database,
-            'product_sale',
+            'SaleDB',
             ['numero'],
             (SaleDB item) => <String, Object?>{
                   'numero': item.numero,
@@ -437,7 +437,7 @@ class _$SaleDao extends SaleDao {
   @override
   Future<List<SaleDB>> getAll() async {
     return _queryAdapter.queryList('SELECT * FROM SaleDB',
-        mapper: (Map<String, Object?> row) => SaleDB(row['numero'] as int,
+        mapper: (Map<String, Object?> row) => SaleDB(row['numero'] as int?,
             row['dataVenda'] as String, row['user'] as int));
   }
 

@@ -18,7 +18,8 @@ import 'package:pa1_activy/Models/Sale/SaleDB.dart';
 )
 class ProductSaleDB {
   @PrimaryKey(autoGenerate: true)
-  final int id;
+  final int? id;
+  
   final int quantity;
   final int subTotal;
   final int product_id;

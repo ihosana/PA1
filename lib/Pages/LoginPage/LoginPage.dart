@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Listar.dart';
 import 'package:pa1_activy/Pages/CadastroPage/CadastroPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/AdmRoutingPage.dart';
 import 'package:pa1_activy/Pages/RoutingPages/RoutingPage.dart';
-import 'package:pa1_activy/dataBase/DataBaseFinal1.dart';
+import 'package:pa1_activy/Pages/User/Autentication/UserSession.dart';
+import 'package:pa1_activy/Pages/User/Cart_Page/ListarSale.dart';
+import 'package:pa1_activy/dataBase/DataBaseFinal2.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController password = TextEditingController();
@@ -64,26 +65,31 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20),
-                      
                       ElevatedButton(
                         onPressed: () => procurarUser(context),
                         child: Text('Entrar'),
                       ),
                       ElevatedButton(
-                        onPressed: () =>
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => CadastroPage()),
-                            ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CadastroPage()),
+                        ),
                         child: Text('Cadastrar'),
                       ),
                       ElevatedButton(
-                        onPressed: () =>
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Listar()),
-                            ),
-                        child: Text('lista'),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Listar()),
+                        ),
+                        child: Text('listaUser'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ListarSale()),
+                        ),
+                        child: Text('listaSales'),
                       ),
                     ],
                   ),
@@ -97,43 +103,33 @@ class LoginPage extends StatelessWidget {
   }
 
   procurarUser(BuildContext context) async {
-    final appDatabase = await $FloorDataBase.databaseBuilder('DataBaseFinal1.db').build();
+    final appDatabase = await $FloorDataBase.databaseBuilder('DataBaseFinal2.db').build();
     final dao = appDatabase.usuarioDao;
-
-    // Obtenha o texto dos campos de texto
     final loginText = login.text;
     final passwordText = password.text;
-
-    // Busque o usuário pelo login e senha
     final usuarios = await dao.getAll();
     for (var i in usuarios) {
-      // Usuário encontrado, faça algo, como navegar para a próxima tela
-      if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==false)){
+      if ((loginText == i.login) &&
+          (int.parse(passwordText) == i.password) &&
+          (i.isAdm == false)) {
         print('senha: ${i.password}, Nome: ${i.login}');
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RoutingPage()),
         );
-
+        UserSession.setUserCpf(i.cpf);
       }
-      if ((loginText==i.login) && (int.parse(passwordText)==i.password) && (i.isAdm==true)){
+      if ((loginText == i.login) &&
+          (int.parse(passwordText) == i.password) &&
+          (i.isAdm == true)) {
         print('senha: ${i.password}, Nome: ${i.login}');
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AdmRoutingPage()),
         );
-
-      }else{
+      } else {
         print("error");
-
       }
-
-
-
-
     }
-
-    // Se não encontrar o usuário, exiba uma mensagem de erro
-
   }
 }

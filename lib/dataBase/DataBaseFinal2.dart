@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:floor/floor.dart';
 import 'package:pa1_activy/Models/Product/ProductDao.dart';
 import 'package:pa1_activy/Models/User/UserDao.dart';
-part 'DataBaseFinal1.g.dart';
+part 'DataBaseFinal2.g.dart';
 
 @Database(version: 1, entities: [UserDB,ProductDB,ProductSaleDB, SaleDB ])
 abstract class DataBase extends FloorDatabase{

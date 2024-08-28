@@ -1,17 +1,15 @@
 import 'package:pa1_activy/Models/Product/ProductDB.dart';
+
 class CartManager {
   static final CartManager _instance = CartManager._internal();
   factory CartManager() => _instance;
   CartManager._internal();
-
   final Map<int, int> _cartQuantities = {};
-
   Map<int, int> get cartQuantities => _cartQuantities;
 
   void addProduct(int productId) {
     if (_cartQuantities.containsKey(productId)) {
       _cartQuantities[productId] = _cartQuantities[productId]! + 1;
-      
     } else {
       _cartQuantities[productId] = 1;
     }
@@ -35,7 +33,13 @@ class CartManager {
     });
   }
 
+  void clearCart() {
+    cartQuantities.clear();
+  }
+
   List<ProductDB> getCartProducts(List<ProductDB> allProducts) {
-    return allProducts.where((product) => _cartQuantities.containsKey(product.code)).toList();
+    return allProducts
+        .where((product) => _cartQuantities.containsKey(product.code))
+        .toList();
   }
 }

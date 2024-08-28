@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pa1_activy/dataBase/DataBaseFinal1.dart';
+import 'package:pa1_activy/dataBase/DataBaseFinal2.dart';
 import 'package:pa1_activy/Models/User/UserDB.dart';
 
 class Listar extends StatelessWidget {
@@ -52,7 +52,7 @@ class Listar extends StatelessWidget {
 
   Future<List<UserDB>> _loadUserData() async {
     // Aqui você precisa usar a classe concreta gerada pelo Floor
-    final appDatabase = await $FloorDataBase.databaseBuilder('DataBaseFinal1.db').build();
+    final appDatabase = await $FloorDataBase.databaseBuilder('DataBaseFinal2.db').build();
     final dao = appDatabase.usuarioDao;
     //var bd= UsuarioBD(4,"Taniro", 666, "tan", false, 123);
     // dao.insertUsuario(bd);

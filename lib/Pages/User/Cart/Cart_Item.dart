@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class CartItem extends StatelessWidget {
   final String imageUrl;
   final String name;
@@ -30,24 +31,27 @@ class CartItem extends StatelessWidget {
           child: Row(
             children: [
               Image.network(imageUrl, width: 50, height: 50),
-              
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       name,
-                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.black),
+                      style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                     Text(
                       price,
-                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold, color: Colors.black),
+                      style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
-                   
                   ],
                 ),
               ),
-              // Botões de quantidade
               Row(
                 children: [
                   IconButton(
@@ -59,9 +63,12 @@ class CartItem extends StatelessWidget {
                     },
                   ),
                   Text(
-                      '$quantity',
-                      style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
+                    '$quantity',
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
                   IconButton(
                     icon: Icon(Icons.add, color: Colors.black),
                     onPressed: () {
