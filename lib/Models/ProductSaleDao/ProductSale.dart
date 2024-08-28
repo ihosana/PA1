@@ -5,13 +5,14 @@ import 'package:pa1_activy/Models/Sale/Sale.dart';
 //import 'package:json_annotation/json_annotation.dart';
 
 class ProductSale {
-  final double price;
+  //final double price;
   final int quantity;
   final int subTotal;
   final Product product;
   final Sale sale;
   ProductSale(
-      {required this.price,
+      {
+        //required this.price,
         required this.quantity,
         required this.subTotal,
         required this.product,

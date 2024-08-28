@@ -4,7 +4,7 @@ import 'package:floor/floor.dart';
 class UserDB {
 
   final String name;
-  @PrimaryKey(autoGenerate: true)
+  @PrimaryKey()
   final int cpf;
 
   final String login;

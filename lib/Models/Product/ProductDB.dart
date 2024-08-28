@@ -1,10 +1,10 @@
 import 'package:floor/floor.dart';
 
 @Entity()
-class ProductDB {
+class ProductDB  {
   
   final String name;
-  @PrimaryKey(autoGenerate: true)
+  @PrimaryKey()
   final int code;
   final String description;
   final double price;

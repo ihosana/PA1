@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Pages/LoginPage/LoginPage.dart';
-import 'package:pa1_activy/dataBase/DataBase3.dart'; // Importe o banco de dados aqui
+import 'package:pa1_activy/dataBase/DataBaseFinal1.dart'; // Importe o banco de dados aqui
 import 'package:pa1_activy/Models/User/UserDB.dart'; // Importe o modelo de usuário aqui
 
 class CadastroPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _CadastroScreenState extends State<CadastroPage> {
   // Método para salvar o usuário
   void _saveUser() async {
     final appDatabase =
-        await $FloorDataBase.databaseBuilder('DataBase3.db').build();
+        await $FloorDataBase.databaseBuilder('DataBaseFinal1.db').build();
     final dao = appDatabase.usuarioDao;
 
     var novoUsuario = UserDB(name.text, int.parse(cpf.text), login.text, isAdm,
@@ -90,6 +90,20 @@ class _CadastroScreenState extends State<CadastroPage> {
                               ),
                             ),
                             SizedBox(height: 20),
+                              Row(
+                              
+                              children: [
+                                Checkbox(
+                                  value: isAdm,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isAdm = value!;
+                                    });
+                                  },
+                                ),
+                                Text('Administrador'),
+                              ],
+                            ),
                             TextFormField(
                               controller: password,
                               decoration: InputDecoration(

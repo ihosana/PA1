@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pa1_activy/Models/Product/ProductDB.dart';
 import 'package:pa1_activy/Pages/User/Car_manage/CartManager.dart';
-import 'package:pa1_activy/dataBase/DataBase3.dart';
+import 'package:pa1_activy/dataBase/DataBaseFinal1.dart';
 
 class ListarP extends StatefulWidget {
   const ListarP({super.key});
@@ -131,7 +131,7 @@ class _ListarPState extends State<ListarP> {
   }
 
   Future<List<ProductDB>> findProduct(String nome) async {
-    final appDatabase = await $FloorDataBase.databaseBuilder('DataBase3.db').build();
+    final appDatabase = await $FloorDataBase.databaseBuilder('DataBaseFinal1.db').build();
     final dao = appDatabase.productDao;
     return dao.findProductsByName(nome);
   }

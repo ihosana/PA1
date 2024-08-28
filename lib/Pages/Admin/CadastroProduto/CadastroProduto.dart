@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pa1_activy/Models/Product/ProductDB.dart';
 import 'package:pa1_activy/Pages/RoutingPages/AdmRoutingPage.dart';
-import 'package:pa1_activy/dataBase/DataBase3.dart';
+import 'package:pa1_activy/dataBase/DataBaseFinal1.dart';
 
 class CadastroProduto extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _CadastroPro extends State<CadastroProduto> {
   // Método para salvar o produto no banco de dados
   void _saveProduct() async {
     final appDatabase =
-        await $FloorDataBase.databaseBuilder('DataBase3.db').build();
+        await $FloorDataBase.databaseBuilder('DataBaseFinal1.db').build();
     final dao = appDatabase.productDao;
     //Formatação do price
     // Remove tudo que não é dígito ou vírgula

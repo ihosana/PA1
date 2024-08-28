@@ -1,17 +1,17 @@
 import 'package:floor/floor.dart';
-import 'package:pa1_activy/Models/ProductSaleDao/ProductSale.dart';
+import 'package:pa1_activy/Models/ProductSaleDao/ProductSaleDB.dart';
 
 @dao
-abstract class ProductDao {
-  @Query('SELECT * FROM ProductDao')
-  Future<List<ProductSale>> getAll();
+abstract class ProductSaleDao {
+  @Query('SELECT * FROM ProductSaleDB')
+  Future<List<ProductSaleDB>> getAll();
 
   @insert
-  Future<int> insertSale(ProductSale productsale);
+  Future<int> insertProductSale(ProductSaleDB productsaleDB);
 
   @update
-  Future<void> updateSale(ProductSale productsale);
+  Future<void> updateProductSale(ProductSaleDB productsaleDB);
 
   @delete
-  Future<void> deleteSale(ProductSale productsale);
+  Future<void> deleteProductSale(ProductSaleDB productsaleDB);
 }

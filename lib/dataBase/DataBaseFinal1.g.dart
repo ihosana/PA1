@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DataBase3.dart';
+part of 'DataBaseFinal1.dart';
 
 // **************************************************************************
 // FloorGenerator
@@ -76,6 +76,10 @@ class _$DataBase extends DataBase {
 
   ProductDao? _productDaoInstance;
 
+  ProductSaleDao? _productSaleDaoInstance;
+
+  SaleDao? _saleDaoInstance;
+
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -98,9 +102,13 @@ class _$DataBase extends DataBase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `UserDB` (`name` TEXT NOT NULL, `cpf` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `login` TEXT NOT NULL, `isAdm` INTEGER NOT NULL, `password` INTEGER NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `UserDB` (`name` TEXT NOT NULL, `cpf` INTEGER NOT NULL, `login` TEXT NOT NULL, `isAdm` INTEGER NOT NULL, `password` INTEGER NOT NULL, PRIMARY KEY (`cpf`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `ProductDB` (`name` TEXT NOT NULL, `code` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `description` TEXT NOT NULL, `price` REAL NOT NULL, `imagePath` TEXT NOT NULL, `category` TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `ProductDB` (`name` TEXT NOT NULL, `code` INTEGER NOT NULL, `description` TEXT NOT NULL, `price` REAL NOT NULL, `imagePath` TEXT NOT NULL, `category` TEXT NOT NULL, PRIMARY KEY (`code`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `ProductSaleDB` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `quantity` INTEGER NOT NULL, `subTotal` INTEGER NOT NULL, `product_id` INTEGER NOT NULL, `sale_id` INTEGER NOT NULL, FOREIGN KEY (`product_id`) REFERENCES `ProductDB` (`code`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`sale_id`) REFERENCES `product_sale` (`numero`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `product_sale` (`numero` INTEGER NOT NULL, `dataVenda` TEXT NOT NULL, `user` INTEGER NOT NULL, FOREIGN KEY (`user`) REFERENCES `UserDB` (`cpf`) ON UPDATE NO ACTION ON DELETE NO ACTION, PRIMARY KEY (`numero`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -116,6 +124,17 @@ class _$DataBase extends DataBase {
   @override
   ProductDao get productDao {
     return _productDaoInstance ??= _$ProductDao(database, changeListener);
+  }
+
+  @override
+  ProductSaleDao get productSaleDao {
+    return _productSaleDaoInstance ??=
+        _$ProductSaleDao(database, changeListener);
+  }
+
+  @override
+  SaleDao get saleDao {
+    return _saleDaoInstance ??= _$SaleDao(database, changeListener);
   }
 }
 
@@ -289,5 +308,152 @@ class _$ProductDao extends ProductDao {
   @override
   Future<void> deleteProduct(ProductDB product) async {
     await _productDBDeletionAdapter.delete(product);
+  }
+}
+
+class _$ProductSaleDao extends ProductSaleDao {
+  _$ProductSaleDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _productSaleDBInsertionAdapter = InsertionAdapter(
+            database,
+            'ProductSaleDB',
+            (ProductSaleDB item) => <String, Object?>{
+                  'id': item.id,
+                  'quantity': item.quantity,
+                  'subTotal': item.subTotal,
+                  'product_id': item.product_id,
+                  'sale_id': item.sale_id
+                }),
+        _productSaleDBUpdateAdapter = UpdateAdapter(
+            database,
+            'ProductSaleDB',
+            ['id'],
+            (ProductSaleDB item) => <String, Object?>{
+                  'id': item.id,
+                  'quantity': item.quantity,
+                  'subTotal': item.subTotal,
+                  'product_id': item.product_id,
+                  'sale_id': item.sale_id
+                }),
+        _productSaleDBDeletionAdapter = DeletionAdapter(
+            database,
+            'ProductSaleDB',
+            ['id'],
+            (ProductSaleDB item) => <String, Object?>{
+                  'id': item.id,
+                  'quantity': item.quantity,
+                  'subTotal': item.subTotal,
+                  'product_id': item.product_id,
+                  'sale_id': item.sale_id
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<ProductSaleDB> _productSaleDBInsertionAdapter;
+
+  final UpdateAdapter<ProductSaleDB> _productSaleDBUpdateAdapter;
+
+  final DeletionAdapter<ProductSaleDB> _productSaleDBDeletionAdapter;
+
+  @override
+  Future<List<ProductSaleDB>> getAll() async {
+    return _queryAdapter.queryList('SELECT * FROM ProductSaleDB',
+        mapper: (Map<String, Object?> row) => ProductSaleDB(
+            row['id'] as int,
+            row['quantity'] as int,
+            row['subTotal'] as int,
+            row['product_id'] as int,
+            row['sale_id'] as int));
+  }
+
+  @override
+  Future<int> insertProductSale(ProductSaleDB productsaleDB) {
+    return _productSaleDBInsertionAdapter.insertAndReturnId(
+        productsaleDB, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateProductSale(ProductSaleDB productsaleDB) async {
+    await _productSaleDBUpdateAdapter.update(
+        productsaleDB, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> deleteProductSale(ProductSaleDB productsaleDB) async {
+    await _productSaleDBDeletionAdapter.delete(productsaleDB);
+  }
+}
+
+class _$SaleDao extends SaleDao {
+  _$SaleDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _saleDBInsertionAdapter = InsertionAdapter(
+            database,
+            'product_sale',
+            (SaleDB item) => <String, Object?>{
+                  'numero': item.numero,
+                  'dataVenda': item.dataVenda,
+                  'user': item.user
+                }),
+        _saleDBUpdateAdapter = UpdateAdapter(
+            database,
+            'product_sale',
+            ['numero'],
+            (SaleDB item) => <String, Object?>{
+                  'numero': item.numero,
+                  'dataVenda': item.dataVenda,
+                  'user': item.user
+                }),
+        _saleDBDeletionAdapter = DeletionAdapter(
+            database,
+            'product_sale',
+            ['numero'],
+            (SaleDB item) => <String, Object?>{
+                  'numero': item.numero,
+                  'dataVenda': item.dataVenda,
+                  'user': item.user
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<SaleDB> _saleDBInsertionAdapter;
+
+  final UpdateAdapter<SaleDB> _saleDBUpdateAdapter;
+
+  final DeletionAdapter<SaleDB> _saleDBDeletionAdapter;
+
+  @override
+  Future<List<SaleDB>> getAll() async {
+    return _queryAdapter.queryList('SELECT * FROM SaleDB',
+        mapper: (Map<String, Object?> row) => SaleDB(row['numero'] as int,
+            row['dataVenda'] as String, row['user'] as int));
+  }
+
+  @override
+  Future<int> insertSale(SaleDB sale) {
+    return _saleDBInsertionAdapter.insertAndReturnId(
+        sale, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateSale(SaleDB sale) async {
+    await _saleDBUpdateAdapter.update(sale, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> deleteSale(SaleDB sale) async {
+    await _saleDBDeletionAdapter.delete(sale);
   }
 }
